@@ -15,7 +15,6 @@ class Request extends Response
     public function __construct()
     {
         $this->session = Session::getInstance();
-        $this->session->set('token', bin2hex(random_bytes(24)));
         $this->server = $_SERVER;
         $this->core = preg_split('/\?/', $_SERVER['REQUEST_URI'])[0];
         $this->method = $_SERVER['REQUEST_METHOD'];
