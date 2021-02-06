@@ -42,6 +42,7 @@ class Router extends Kernel
                     $controller = new $controller($this->request, $this);
                     if (!empty($this->params['params'])) {
                         $controller->$action($this->params['params']);
+                        exit();
                     }
                     $controller->$action();
                 } else {

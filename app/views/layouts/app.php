@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="/css/app.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
-<body x-data="{sidebar: <?php echo isset($errors) ? 'true' : 'false' ?>}">
+<body x-data="{sidebar: <?php echo isset($errors) && (new \src\core\Request())->core == '/' ? 'true' : 'false' ?>}">
 <header class="sticky top-0 w-full bg-white shadow-lg py-4">
     <div class="container mx-auto flex justify-between items-center">
         <a href="/" class="text-xl font-bold">NEWBEE</a>
@@ -20,9 +20,11 @@
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="10" height="10" class="fill-current text-black"><path fill="currentColor" d="M443.5 162.6l-7.1-7.1c-4.7-4.7-12.3-4.7-17 0L224 351 28.5 155.5c-4.7-4.7-12.3-4.7-17 0l-7.1 7.1c-4.7 4.7-4.7 12.3 0 17l211 211.1c4.7 4.7 12.3 4.7 17 0l211-211.1c4.8-4.7 4.8-12.3.1-17z" class=""></path></svg>
                 </div>
                 <div x-show="open" @click.away="open=false" class="absolute right-0 top-full bg-gray-100 shadow-lg w-auto whitespace-nowrap rounded-md py-2 divide-y">
-                    <div class="p-2 hover:bg-gray-200">
-                        <a href="/profile" class="w-full block">Profile</a>
-                    </div>
+                    <?php if (\src\core\Auth::user()->admin): ?>
+                        <div class="p-2 hover:bg-gray-200">
+                            <a href="/admin" class="w-full block">Admin dashboard</a>
+                        </div>
+                    <?php endif; ?>
                     <form class="p-2 hover:bg-gray-200" action="/logout" method="post">
                         <button type="submit" class="focus:outline-none">Logout from system</button>
                     </form>

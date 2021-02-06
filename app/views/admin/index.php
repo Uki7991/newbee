@@ -13,9 +13,7 @@
                     <td class="">Task <a class="text-red-600" href="<?php echo \src\core\Route::to('/', ['page' => $tasks_collection['pagination']['page'], 'limit' => $tasks_collection['pagination']['limit'], 'orderBy' => 'title', 'orderDirection' => $tasks_collection['orderDirection'] === 'asc' ? 'desc' : 'asc']) ?>">order</a></td>
                     <td class="">Username <a class="text-red-600" href="<?php echo \src\core\Route::to('/', ['page' => $tasks_collection['pagination']['page'], 'limit' => $tasks_collection['pagination']['limit'], 'orderBy' => 'username', 'orderDirection' => $tasks_collection['orderDirection'] === 'asc' ? 'desc' : 'asc']) ?>">order</a></td>
                     <td class="">Email <a class="text-red-600" href="<?php echo \src\core\Route::to('/', ['page' => $tasks_collection['pagination']['page'], 'limit' => $tasks_collection['pagination']['limit'], 'orderBy' => 'email', 'orderDirection' => $tasks_collection['orderDirection'] === 'asc' ? 'desc' : 'asc']) ?>">order</a></td>
-                    <?php if (\src\core\Auth::user() && \src\core\Auth::user()->admin): ?>
-                        <td class="rounded-tr p-2">Action</td>
-                    <?php endif; ?>
+                    <td class="rounded-tr p-2">Action</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,15 +23,13 @@
                         <td class=""><?php echo $task->title ?></td>
                         <td class=""><?php echo $task->username ?></td>
                         <td class=""><?php echo $task->email ?></td>
-                        <?php if (\src\core\Auth::user() && \src\core\Auth::user()->admin): ?>
-                            <td class="group-hover:rounded-r-xl p-2">
-                                <a class="" href="/admin/tasks/<?php echo $task->id ?>/edit">Edit</a>
-                                <form action="/tasks/<?php echo $task->id; ?>" method="post">
-                                    <input type="hidden" name="_method" value="delete">
-                                    <button type="submit" class="bg-red-600 text-white rounded-md p-2">delete</button>
-                                </form>
-                            </td>
-                        <?php endif; ?>
+                        <td class="group-hover:rounded-r-xl p-2 flex space-x-3 items-center">
+                            <a class="text-yellow-700" href="/admin/tasks/<?php echo $task->id ?>/edit">Edit</a>
+                            <form action="/tasks/<?php echo $task->id; ?>" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="bg-red-600 text-white rounded-md p-2">delete</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

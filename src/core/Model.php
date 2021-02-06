@@ -9,12 +9,17 @@ class Model
     protected $table;
     protected $fillable;
     protected $hidden;
-    private $attrs;
+    public $attrs;
 
     public function __construct($attrs = [])
     {
         $this->db = new DB();
         $this->attrs = $attrs;
+    }
+
+    public function __get($name)
+    {
+        return $this->attrs->$name;
     }
 
     public function all($limit = null, $offset = null, $orderBy = null, $orderDirection = null)
@@ -34,7 +39,8 @@ class Model
 
     public function findById($id)
     {
-        return $this->db->get('Select * from '.$this->table.' where id = :id', ['id' => $id]);
+        $found = $this->db->get('Select * from '.$this->table.' where id = :id', ['id' => $id]);
+        return $found ? new $this($found) : null;
     }
 
     public function deleteById($id)
@@ -48,5 +54,14 @@ class Model
             return ':'.$item;
         }, $this->fillable);
         return $this->db->query('Insert Into '.$this->table.' ('.implode(', ', $this->fillable).') values ('.implode(', ', $binds).')', $this->attrs)->execute();
+    }
+
+    public function update($attrs)
+    {
+        $binds = [];
+        foreach ($attrs as $key => $attr) {
+            $binds[] = $key . ' = :' .$key;
+        }
+        return $this->db->query('update '.$this->table.' set '.implode(', ', $binds).' where id = :id', array_merge($attrs, ['id' => $this->id]))->execute();
     }
 }

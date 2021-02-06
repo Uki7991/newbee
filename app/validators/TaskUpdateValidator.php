@@ -1,9 +1,12 @@
 <?php
+
+
 namespace app\validators;
+
 
 use src\core\Validator;
 
-class TaskStoreValidator extends Validator
+class TaskUpdateValidator extends Validator
 {
     public function rules()
     {
@@ -11,11 +14,11 @@ class TaskStoreValidator extends Validator
             'title' => [
                 'required',
             ],
-            'username' => [
-                'required', 'nonspace',
-            ],
             'email' => [
                 'required', 'email',
+            ],
+            'username' => [
+                'required', 'nonspace',
             ]
         ];
     }

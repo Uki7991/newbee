@@ -12,8 +12,8 @@ class LoginValidator extends Validator
     public function rules()
     {
         return [
-            'email' => [
-                'required', 'email',
+            'name' => [
+                'required', 'nonspace',
             ],
             'password' => [
                 'required',

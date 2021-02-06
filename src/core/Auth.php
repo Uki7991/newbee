@@ -7,10 +7,10 @@ use src\core\models\UserModel;
 
 abstract class Auth
 {
-    public static function attempt($email, $password)
+    public static function attempt($username, $password)
     {
         $user = new User();
-        $user = $user->findByEmail($email);
+        $user = $user->findByName($username);
 
         if ($user) {
             if (password_verify($password, $user->password)) {
@@ -20,7 +20,7 @@ abstract class Auth
         }
 
         Session::getInstance()->flash('errors', ['email' => 'Credentials not found']);
-        Session::getInstance()->flash('old', ['email' => $email]);
+        Session::getInstance()->flash('old', ['name' => $username]);
 
         return false;
     }

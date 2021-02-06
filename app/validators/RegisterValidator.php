@@ -12,7 +12,7 @@ class RegisterValidator extends Validator
     {
         return [
             'name' => [
-                'required',
+                'required', 'nonspace',
             ],
             'email' => [
                 'required', 'email'

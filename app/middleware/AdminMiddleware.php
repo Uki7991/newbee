@@ -6,6 +6,7 @@ namespace app\middleware;
 
 use src\core\Auth;
 use src\core\Request;
+use src\core\Session;
 use src\core\View;
 
 class AdminMiddleware

@@ -2,9 +2,9 @@
     <div class="w-1/3 h-screen flex items-center bg-white bg-opacity-50 justify-center relative">
         <form class="flex flex-col space-y-4 w-1/2" action="/login" method="post">
             <div class="flex flex-col">
-                <label for="" class="mb-1">E-mail</label>
-                <input class="rounded-md" type="email" name="email" value="<?php echo isset($old['email']) ? $old['email'] : ''; ?>">
-                <?php if (isset($errors['email'])): ?><span class="text-xs mt-1 text-red-600"><?php echo $errors['email']?></span><?php endif; ?>
+                <label for="" class="mb-1">Username</label>
+                <input class="rounded-md" type="text" name="name" value="<?php echo isset($old['name']) ? $old['name'] : ''; ?>">
+                <?php if (isset($errors['name'])): ?><span class="text-xs mt-1 text-red-600"><?php echo $errors['name']?></span><?php endif; ?>
             </div>
             <div class="flex flex-col">
                 <label for="" class="mb-1">Password</label>

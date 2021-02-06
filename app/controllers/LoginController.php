@@ -23,11 +23,11 @@ class LoginController extends Controller
             $this->response->back();
         }
 
-        $email = $this->request->request['email'];
+        $name = $this->request->request['name'];
         $password = $this->request->request['password'];
 
         $user = new User();
-        $user = Auth::attempt($email, $password) ?: $this->response->back();
+        $user = Auth::attempt($name, $password) ?: $this->response->back();
 
         $this->response->redirect('/');
     }
@@ -52,7 +52,7 @@ class LoginController extends Controller
         ]);
         $user->save();
 
-        $user = Auth::attempt($this->request->request['email'], $this->request->request['password']);
+        $user = Auth::attempt($this->request->request['name'], $this->request->request['password']);
 
         $this->response->redirect('/');
     }
